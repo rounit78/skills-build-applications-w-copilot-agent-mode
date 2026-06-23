@@ -5,7 +5,7 @@ const CODESPACE_NAME = typeof rawCodespaceName === 'string' && rawCodespaceName.
 
 export const API_HOST = CODESPACE_NAME
   ? `https://${CODESPACE_NAME}-8000.app.github.dev`
-  : 'http://localhost:8000';
+  : import.meta.env.VITE_CODESPACE_NAME ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev` : 'http://localhost:8000';
 
 export const getApiUrl = (path: string) => {
   const normalizedPath = path.startsWith('/') ? path : `/${path}`;
