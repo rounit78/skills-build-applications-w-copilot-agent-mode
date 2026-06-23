@@ -14,7 +14,7 @@ export default function Users() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchApi('/api/users')
+    fetchApi('/api/users/')
       .then((data) => setUsers(normalizeApiResponse<User>(data)))
       .catch((error) => setError(error?.message || 'Failed to load users'))
       .finally(() => setLoading(false));

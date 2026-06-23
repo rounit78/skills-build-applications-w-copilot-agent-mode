@@ -14,7 +14,7 @@ export default function Workouts() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchApi('/api/workouts')
+    fetchApi('/api/workouts/')
       .then((data) => setWorkouts(normalizeApiResponse<Workout>(data)))
       .catch((error) => setError(error?.message || 'Failed to load workouts'))
       .finally(() => setLoading(false));

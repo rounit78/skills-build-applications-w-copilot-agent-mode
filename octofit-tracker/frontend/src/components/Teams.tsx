@@ -13,7 +13,7 @@ export default function Teams() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchApi('/api/teams')
+    fetchApi('/api/teams/')
       .then((data) => setTeams(normalizeApiResponse<Team>(data)))
       .catch((error) => setError(error?.message || 'Failed to load teams'))
       .finally(() => setLoading(false));

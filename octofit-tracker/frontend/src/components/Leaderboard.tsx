@@ -14,7 +14,7 @@ export default function Leaderboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchApi('/api/leaderboard')
+    fetchApi('/api/leaderboard/')
       .then((data) => setLeaderboard(normalizeApiResponse<LeaderboardEntry>(data)))
       .catch((error) => setError(error?.message || 'Failed to load leaderboard'))
       .finally(() => setLoading(false));

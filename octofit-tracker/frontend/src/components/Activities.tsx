@@ -15,7 +15,7 @@ export default function Activities() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchApi('/api/activities')
+    fetchApi('/api/activities/')
       .then((data) => setActivities(normalizeApiResponse<Activity>(data)))
       .catch((error) => setError(error?.message || 'Failed to load activities'))
       .finally(() => setLoading(false));
