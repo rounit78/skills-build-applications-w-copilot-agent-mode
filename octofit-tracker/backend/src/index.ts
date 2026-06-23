@@ -11,6 +11,11 @@ const PORT = Number(process.env.PORT || 8000);
 const HOST = process.env.CODESPACE_NAME ? '0.0.0.0' : 'localhost';
 const CODESPACE_NAME = process.env.CODESPACE_NAME;
 
+const getApiUrl = () =>
+  CODESPACE_NAME
+    ? `https://${CODESPACE_NAME}-8000.app.github.dev`
+    : `http://${HOST}:${PORT}`;
+
 app.use(express.json());
 app.use('/api/users', usersRouter);
 app.use('/api/teams', teamsRouter);
@@ -24,8 +29,7 @@ app.get('/', (_req, res) => {
 
 if (CODESPACE_NAME) {
   app.get('/api-url', (_req, res) => {
-    const previewUrl = `https://${PORT}-${CODESPACE_NAME}.githubpreview.dev`;
-    res.json({ apiUrl: previewUrl, source: 'codespaces' });
+    res.json({ apiUrl: getApiUrl(), source: 'codespaces' });
   });
 }
 
@@ -35,10 +39,7 @@ async function start() {
     console.log('Connected to MongoDB');
 
     app.listen(PORT, HOST, () => {
-      const address = CODESPACE_NAME
-        ? `https://${PORT}-${CODESPACE_NAME}.githubpreview.dev`
-        : `http://${HOST}:${PORT}`;
-      console.log(`Backend server listening on ${address}`);
+      console.log(`Backend server listening on ${getApiUrl()}`);
     });
   } catch (error) {
     console.error('Failed to start backend', error);
